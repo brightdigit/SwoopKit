@@ -1,7 +1,7 @@
 name: SwoopKit
 # Pull requests only: a push to a PR branch already triggers `pull_request`,
 # so a `push` trigger would run every commit twice. Use "Run workflow" for a
-# branch without a PR (it gets the full matrix on main and v* branches).
+# branch without a PR (it gets the full matrix on main and semver branches).
 on:
   pull_request:
     paths-ignore:

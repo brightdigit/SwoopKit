@@ -1,4 +1,4 @@
-.PHONY: help build test lint format headers docs docs-preview xcode clean
+.PHONY: help build test lint format headers docs docs-preview clean
 
 .DEFAULT_GOAL := help
 
@@ -29,10 +29,6 @@ docs:
 ## docs-preview: Serve a live DocC preview
 docs-preview:
 	@DOCC_PREVIEW=1 ./Scripts/docc.sh
-
-## xcode: Generate an Xcode project with a Lint target (XcodeGen)
-xcode:
-	xcodegen generate
 
 ## clean: Remove build products
 clean:

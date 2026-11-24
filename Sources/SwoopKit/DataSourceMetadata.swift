@@ -136,7 +136,7 @@ public struct DataSourceMetadata: Codable, Sendable {
     recordTypeName: String,
     recordCount: Int,
     fetchDurationSeconds: Double
-  ) throws {
+  ) throws(DataSourceMetadataValidationError) {
     try validateNames(sourceName: sourceName, recordTypeName: recordTypeName)
     try validateNumericFields(recordCount: recordCount, fetchDurationSeconds: fetchDurationSeconds)
   }
@@ -173,7 +173,10 @@ public struct DataSourceMetadata: Codable, Sendable {
     "metadata-\(sourceName)-\(recordTypeName)"
   }
 
-  private static func validateNames(sourceName: String, recordTypeName: String) throws {
+  private static func validateNames(
+    sourceName: String,
+    recordTypeName: String
+  ) throws(DataSourceMetadataValidationError) {
     if sourceName.isEmpty {
       throw DataSourceMetadataValidationError(details: .emptySourceName)
     }
@@ -196,7 +199,7 @@ public struct DataSourceMetadata: Codable, Sendable {
   private static func validateNumericFields(
     recordCount: Int,
     fetchDurationSeconds: Double
-  ) throws {
+  ) throws(DataSourceMetadataValidationError) {
     if !isValidRecordCount(recordCount) {
       throw DataSourceMetadataValidationError(details: .negativeRecordCount(recordCount))
     }

@@ -7,8 +7,6 @@
 # Every lint tool runs strict, so a warning fails its step; the script keeps
 # going and exits non-zero if any step failed.
 #
-#   LINT_MODE=NONE     skip everything (used by the Xcode Lint target)
-#   LINT_MODE=INSTALL  exit straight away
 #   FORMAT_ONLY=1      only format (skips lint, build and periphery)
 
 # Keep running after a failed step; ERRORS counts them.
@@ -18,18 +16,8 @@ run_command() {
 	"$@" || ERRORS=$((ERRORS + 1))
 }
 
-if [ "$LINT_MODE" = "INSTALL" ]; then
-	exit
-fi
-
-echo "LintMode: $LINT_MODE"
-
-if [ -z "$SRCROOT" ]; then
-	SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
-	PACKAGE_DIR="${SCRIPT_DIR}/.."
-else
-	PACKAGE_DIR="${SRCROOT}"
-fi
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+PACKAGE_DIR="${SCRIPT_DIR}/.."
 
 # Put the mise-pinned tools on PATH outside CI (CI uses jdx/mise-action).
 # Skipped in Claude Code web sessions, which can't reach the GitHub API that
@@ -45,10 +33,6 @@ if [ "${CLAUDE_CODE_REMOTE:-}" = "true" ]; then
 	RUN_SWIFTLINT=0
 else
 	RUN_SWIFTLINT=1
-fi
-
-if [ "$LINT_MODE" = "NONE" ]; then
-	exit
 fi
 
 SWIFTFORMAT_FORMAT_OPTIONS="--configuration .swift-format"
