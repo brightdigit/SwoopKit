@@ -33,11 +33,9 @@ import XCTest
 
 // swiftlint:disable file_length
 internal final class RestoreImageRecordValidationTests: XCTestCase {
-  // swiftlint:disable force_unwrapping
   private static let sampleDownloadURL = URL(
     string: "https://updates.cdn-apple.com/2023/macos/23C71/UniversalMac_14.2.1_23C71_Restore.ipsw"
   )!
-  // swiftlint:enable force_unwrapping
 
   private func makeSampleRecord() -> RestoreImageRecord {
     RestoreImageRecord(
@@ -216,7 +214,6 @@ internal final class RestoreImageRecordValidationTests: XCTestCase {
   }
 
   internal func testValidateInsecureDownloadURL() {
-    // swiftlint:disable:next force_unwrapping
     let httpURL = URL(string: "http://example.com/insecure.ipsw")!
     let record = RestoreImageRecord(
       version: "14.2.1",
@@ -244,7 +241,6 @@ internal final class RestoreImageRecordValidationTests: XCTestCase {
 
   internal func testValidateMissingURLScheme() {
     // Create a URL without a scheme (relative URL)
-    // swiftlint:disable:next force_unwrapping
     let urlWithoutScheme = URL(string: "//example.com/file.ipsw")!
     let record = RestoreImageRecord(
       version: "14.2.1",
@@ -279,7 +275,6 @@ internal final class RestoreImageRecordValidationTests: XCTestCase {
       version: "14.2.1",
       buildNumber: "23C71",
       releaseDate: Date(),
-      // swiftlint:disable:next force_unwrapping
       downloadURL: URL(string: "https://example.com/file.ipsw")!,
       fileSize: 14_500_000_000,
       sha256Hash: uppercaseSHA256,

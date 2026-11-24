@@ -32,9 +32,7 @@ import XCTest
 @testable import SwoopKit
 
 internal final class SwiftVersionRecordTests: XCTestCase {
-  // swiftlint:disable force_unwrapping
   private static let swiftDownloadURL = URL(string: "https://swift.org/download")!
-  // swiftlint:enable force_unwrapping
 
   private func makeSampleRecord() -> SwiftVersionRecord {
     SwiftVersionRecord(

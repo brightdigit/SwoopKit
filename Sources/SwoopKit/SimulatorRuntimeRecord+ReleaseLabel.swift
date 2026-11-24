@@ -77,8 +77,9 @@ extension SimulatorRuntimeRecord {
 
     /// Parses a ``description`` ("Beta 4", "RC 1" or "Final").
     ///
+    /// Fails (returns `nil`) for any other text, including a number below 1.
+    ///
     /// - Parameter description: The label's text.
-    /// - Returns: `nil` for any other text, including a number below 1.
     public init?(_ description: String) {
       if description == Self.finalText {
         self = .final
@@ -98,6 +99,13 @@ extension SimulatorRuntimeRecord {
       }
     }
 
+    /// Whether `lhs` is an earlier stage than `rhs`: betas, then release candidates,
+    /// then final, each ordered by number.
+    ///
+    /// - Parameters:
+    ///   - lhs: A label.
+    ///   - rhs: A label of the same platform and version.
+    /// - Returns: `true` if `lhs` comes before `rhs`.
     public static func < (lhs: Self, rhs: Self) -> Bool {
       lhs.sortKey < rhs.sortKey
     }
@@ -105,6 +113,10 @@ extension SimulatorRuntimeRecord {
 }
 
 extension SimulatorRuntimeRecord.ReleaseLabel: Codable {
+  /// Decodes a label from its ``description`` string.
+  ///
+  /// - Parameter decoder: The decoder to read from.
+  /// - Throws: `DecodingError.dataCorrupted` if the string isn't a release label.
   public init(from decoder: any Decoder) throws {
     let container = try decoder.singleValueContainer()
     let text = try container.decode(String.self)
@@ -117,6 +129,10 @@ extension SimulatorRuntimeRecord.ReleaseLabel: Codable {
     self = label
   }
 
+  /// Encodes the label as its ``description`` string.
+  ///
+  /// - Parameter encoder: The encoder to write to.
+  /// - Throws: Any error from the encoder.
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.singleValueContainer()
     try container.encode(description)

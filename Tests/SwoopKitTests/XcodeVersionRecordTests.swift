@@ -32,9 +32,7 @@ import XCTest
 @testable import SwoopKit
 
 internal final class XcodeVersionRecordTests: XCTestCase {
-  // swiftlint:disable force_unwrapping
   private static let xcodeDownloadURL = URL(string: "https://developer.apple.com/xcode/download")!
-  // swiftlint:enable force_unwrapping
 
   private func makeSampleRecord() -> XcodeVersionRecord {
     XcodeVersionRecord(
@@ -137,7 +135,7 @@ internal final class XcodeVersionRecordTests: XCTestCase {
     let json = Data(
       #"""
       {"version": "16.1", "buildNumber": "16B5029d",
-       "releaseDate": 749433600, "isPrerelease": true}
+      "releaseDate": 749433600, "isPrerelease": true}
       """#.utf8
     )
 

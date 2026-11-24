@@ -32,13 +32,11 @@ import XCTest
 @testable import SwoopKit
 
 internal final class RestoreImageRecordTests: XCTestCase {
-  // swiftlint:disable force_unwrapping
   private static let sampleDownloadURL = URL(
     string: "https://updates.cdn-apple.com/2023/macos/23C71/UniversalMac_14.2.1_23C71_Restore.ipsw"
   )!
   private static let betaDownloadURL = URL(string: "https://example.com/beta.ipsw")!
   private static let minimalDownloadURL = URL(string: "https://example.com/restore.ipsw")!
-  // swiftlint:enable force_unwrapping
 
   private func makeSampleRecord() -> RestoreImageRecord {
     RestoreImageRecord(
