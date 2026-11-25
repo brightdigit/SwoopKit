@@ -14,4 +14,4 @@ This directory is SwoopKit's memory store for agents. It's committed to git, so 
 
 ## Index
 
-_No memories yet._
+- [CI runner images](ci-runner-images.md): Swift 6.4 release images, Xcode 27.2 device names, lint pinned to ubuntu-24.04

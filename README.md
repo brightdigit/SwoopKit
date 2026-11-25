@@ -106,7 +106,7 @@ make test
 make lint      # Scripts/lint.sh: format, swift-format, SwiftLint, build, headers, periphery
 ```
 
-CI runs on pull requests only (`.github/workflows`): Linux (Swift 6.4 nightly) and Apple platforms (Xcode 27), the DocC build, lint, CodeQL and an `unsafeFlags` check.
+CI runs on pull requests only (`.github/workflows`): Linux (Swift 6.4) and Apple platforms (Xcode 27.2), the DocC build, lint, CodeQL and an `unsafeFlags` check.
 
 ## License
 

@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       # The manifest is swift-tools-version 6.4; use a 6.4 toolchain to read it.
-      image: swiftlang/swift:nightly-6.4.x-noble
+      image: swift:6.4-noble
     steps:
       - name: Checkout
         uses: actions/checkout@v6
