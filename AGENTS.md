@@ -40,7 +40,7 @@ There is no Xcode project or XcodeGen target; open `Package.swift` directly.
 
 ## CI
 
-GitHub Actions workflows trigger on `pull_request` (plus `workflow_dispatch`, a weekly CodeQL schedule, branch deletion for cache cleanup, and issue/review-comment events for `claude.yml`), never on `push`. PRs into `main` or a semver branch (`v1.2.3`, `1.2.3-beta.1`) get the full Apple-platform matrix.
+GitHub Actions workflows trigger on `pull_request` (plus `workflow_dispatch`, branch deletion for cache cleanup, and issue/review-comment events for `claude.yml`), never on `push`. PRs into `main` or a semver branch (`v1.2.3`, `1.2.3-beta.1`) get the full Apple-platform matrix.
 
 - The manifest needs Swift 6.4, so Linux lanes use the release `swift:6.4-<os>` images and Apple lanes use the `xcode-27` runner image with `/Applications/Xcode_27.2.app` (27.2 simulators; devices iPhone 18 Pro, Apple Watch Ultra 4 (49mm), Apple TV 4K (4th generation)).
 - The lint job is pinned to `ubuntu-24.04`: `ubuntu-latest` is Ubuntu 26.04, which lacks the `libxml2.so.2` the SwiftLint binary needs.

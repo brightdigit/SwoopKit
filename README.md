@@ -36,11 +36,11 @@ SwoopKit is the vocabulary the Swoop packages share. A writer fills these record
 | `RestoreImageRecord` | A macOS restore image (IPSW), with hash and URL validation |
 | `DataSourceMetadata` | When a data source was last fetched, and how many records it gave |
 
-It depends only on Foundation. Every type is `Sendable` and `Codable`, and each record has a stable `recordName` for its CloudKit record.
+It depends only on Foundation. Every type is `Sendable`, the records are `Codable`, and each record has a stable `recordName` for its CloudKit record.
 
 ## Requirements
 
-- Swift 6.4 (swift-tools-version 6.4, Swift 6 language mode)
+- Swift 6.4 (swift-tools-version 6.4, Swift 6 language mode); Xcode 27.2 on Apple platforms
 - macOS 12, iOS 18, watchOS 11, tvOS 18, visionOS 2 or Mac Catalyst 18; or Linux
 
 ## Installation
@@ -49,7 +49,7 @@ Add SwoopKit to your `Package.swift`:
 
 ```swift
 dependencies: [
-  .package(url: "https://github.com/brightdigit/SwoopKit.git", from: "1.0.0")
+  .package(url: "https://github.com/brightdigit/SwoopKit.git", from: "1.0.0-alpha.1")
 ]
 ```
 
@@ -106,7 +106,7 @@ make test
 make lint      # Scripts/lint.sh: format, swift-format, SwiftLint, build, headers, periphery
 ```
 
-CI runs on pull requests only (`.github/workflows`): Linux (Swift 6.4) and Apple platforms (Xcode 27.2), the DocC build, lint, CodeQL and an `unsafeFlags` check.
+CI runs on pull requests only (`.github/workflows`): Linux (Swift 6.4) and Apple platforms (Xcode 27.2), the DocC build, lint and an `unsafeFlags` check.
 
 ## License
 
