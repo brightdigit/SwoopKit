@@ -39,6 +39,12 @@ jobs:
       if: matrix.language == 'swift'
       run: sudo xcode-select -s /Applications/Xcode_27.2.app/Contents/Developer
 
+    # CodeQL's Swift tracer runs x86_64 binaries; without Rosetta the
+    # package manifest fails with "Bad CPU type in executable (86)".
+    - name: Install Rosetta
+      if: matrix.language == 'swift' && runner.arch == 'ARM64'
+      run: /usr/sbin/softwareupdate --install-rosetta --agree-to-license || true
+
     - name: Verify Swift Version
       if: matrix.language == 'swift'
       run: |
