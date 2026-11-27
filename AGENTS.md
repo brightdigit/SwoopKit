@@ -4,13 +4,14 @@ Guidance for Claude Code when working in this repository.
 
 ## What this is
 
-SwoopKit is a Swift package of shared models for Apple release data: `SDKVersionRecord`, `SimulatorRuntimeRecord` (with `ReleaseLabel`), `XcodeVersionRecord`, `SwiftVersionRecord`, `RestoreImageRecord`, `DataSourceMetadata` and the two validation errors. It has one library product and one target, `SwoopKit`, and depends only on Foundation.
+SwoopKit is a Swift package of shared models for Apple release data: `SDKVersionRecord`, `SimulatorRuntimeRecord` (with `ReleaseLabel`), `XcodeVersionRecord`, `SwiftVersionRecord`, `RestoreImageRecord`, `DataSourceMetadata` and the two validation errors, plus `ReleaseDataSnapshot` (the three record types an app bundles, with `fetchedAt`) and the JSON coders it's written and read with (`JSONEncoder.iso8601PrettySorted`, `JSONDecoder.iso8601`, `JSONDecoder.decodeValue(_:from:)`). It has one library product and one target, `SwoopKit`, and depends only on Foundation.
 
 Its consumers rely on these types staying stable:
 
 - **SwoopMistKit** writes them to a CloudKit public database.
 - **SwoopCloudKit** maps `CKRecord`s back to them.
 - **Bushel** and **Stewed** match installed software against them.
+- **SwoopMistKit**'s snapshot export and **SwoopCloudKit**'s `fetchSnapshot(now:)` both produce a `ReleaseDataSnapshot`, and its JSON must stay byte-identical between them (brightdigit/Stewed#194).
 
 ## Rules
 
