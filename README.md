@@ -35,6 +35,7 @@ SwoopKit is the vocabulary the Swoop packages share. A writer fills these record
 | `SwiftVersionRecord` | A Swift compiler release |
 | `RestoreImageRecord` | A macOS restore image (IPSW), with hash and URL validation |
 | `DataSourceMetadata` | When a data source was last fetched, and how many records it gave |
+| `ReleaseDataSnapshot` | The `SDKVersion`, `XcodeVersion` and `SimulatorRuntime` records fetched together, with `fetchedAt`: an app's bundled snapshot or a disk cache's contents |
 
 It depends only on Foundation. Every type is `Sendable`, the records are `Codable`, and each record has a stable `recordName` for its CloudKit record.
 
@@ -83,6 +84,8 @@ runtime.recordName    // "SimulatorRuntime-iOS-24B114"
 // Labels order Beta 1 < … < RC 1 < … < Final.
 SimulatorRuntimeRecord.ReleaseLabel("Beta 4")! < .releaseCandidate(1)  // true
 ```
+
+Write a `ReleaseDataSnapshot` with `JSONEncoder.iso8601PrettySorted` (ISO 8601 dates in whole seconds, pretty-printed, sorted keys) so the file is stable and diffable, and read one with `ReleaseDataSnapshot(json:)`, which uses `JSONDecoder.iso8601` and throws a typed `DecodingError` (`JSONDecoder.decodeValue(_:from:)`).
 
 Decoding doesn't validate. After ingesting external data, call `RestoreImageRecord.validate()` or `DataSourceMetadata.validate(sourceName:recordTypeName:recordCount:fetchDurationSeconds:)`.
 

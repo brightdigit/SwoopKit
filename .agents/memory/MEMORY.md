@@ -15,3 +15,4 @@ This directory is SwoopKit's memory store for agents. It's committed to git, so 
 ## Index
 
 - [CI runner images](ci-runner-images.md): Swift 6.4 release images, Xcode 27.2 device names, lint pinned to ubuntu-24.04
+- [ReleaseDataSnapshot home](release-data-snapshot-home.md): moved from SwoopCloudKit for Stewed#194; JSON bytes pinned; consumers must drop their copies of the coders

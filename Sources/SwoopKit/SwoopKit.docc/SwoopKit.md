@@ -41,6 +41,21 @@ Order releases of the same platform and version by
 ``SimulatorRuntimeRecord/ReleaseLabel`` rather than by build number: betas sort before
 release candidates, which sort before the final release.
 
+### Release-data snapshots
+
+``ReleaseDataSnapshot`` holds the `SDKVersion`, `XcodeVersion` and `SimulatorRuntime`
+records fetched together, stamped with ``ReleaseDataSnapshot/fetchedAt``. Encode it
+with ``Foundation/JSONEncoder/iso8601PrettySorted`` so the file is stable and
+diffable, and decode one with ``ReleaseDataSnapshot/init(json:)``:
+
+```swift
+let data = try JSONEncoder.iso8601PrettySorted.encode(snapshot)
+let bundled = try ReleaseDataSnapshot(json: data)
+```
+
+ISO 8601 keeps whole seconds only, so a `fetchedAt` with a fractional second comes
+back without it.
+
 ### Validation
 
 Decoding a record doesn't validate it. When you ingest data from an external source,
@@ -67,6 +82,13 @@ and handle ``RestoreImageRecordValidationError`` or
 
 - ``RestoreImageRecord``
 - ``RestoreImageRecordValidationError``
+
+### Release-data snapshots
+
+- ``ReleaseDataSnapshot``
+- ``Foundation/JSONEncoder/iso8601PrettySorted``
+- ``Foundation/JSONDecoder/iso8601``
+- ``Foundation/JSONDecoder/decodeValue(_:from:)``
 
 ### Data source bookkeeping
 
